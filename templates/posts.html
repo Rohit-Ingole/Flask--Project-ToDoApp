@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block head %}
+<title>Posts</title>
+{% endblock %} {% block body %}
+<h1>All Posts</h1>
+
+<hr />
+
+<h2>Create New Blog Post</h2>
+
+<form action="/posts" method="POST">
+  <label for="title">Title</label>
+  <form>
+    <input
+      class="form-control"
+      type="text"
+      aria-label="Search"
+      name="title"
+      id="title"
+    />
+  </form>
+  <br />
+
+  <label for="author">Author</label>
+  <form>
+    <input
+      class="form-control"
+      type="text"
+      aria-label="Search"
+      name="author"
+      id="author"
+    />
+  </form>
+  <br />
+
+  <label for="content">Post</label>
+  <textarea class="form-control" id="content" rows="3"></textarea>
+
+  <br />
+  <a class="btn btn-success" href="/posts" value="POST"> Post </a>
+</form>
+
+<hr />
+
+{% for post in posts %}
+
+<h2>{{ post.title }}</h2>
+{% if post.author %}
+<small> Written By: {{ post.author }} on {{post.date_post}}</small>
+{% else %}
+<small> Written By: N/A on {{post.date_post}}</small>
+{% endif %}
+
+<br />
+<br />
+
+<p>{{post.content}}</p>
+<a class="btn btn-danger" href="/posts/delete/{{post.id}}"> Delete </a>
+
+<a class="btn btn-primary" href="/posts/edit/{{post.id}}"> Edit </a>
+<br />
+<hr />
+
+{% endfor %} {% endblock %}
